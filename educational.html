@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechLearn Blog</title>
+</head>
+<body bgcolor="#FFF8E1">
+
+<center>
+<h1>WELCOME TO TECHLEARN BLOG</h1>
+</center>
+
+<center>
+<p>
+A simple technology blog to learn, review and discuss tech topics.  
+We keep things clear and easy — tutorials, reviews, news and community comments.
+</p>
+</center>
+
+<br>
+
+<center>
+<img src="TECH BANNER.jpg" height="300" width="800" alt="Tech Banner">
+</center>
+
+<hr>
+
+<center><h2>Categories</h2></center>
+
+<center>
+<p>
+<strong>Tutorials</strong> | <strong>Reviews</strong> | <strong>News</strong> | <strong>Guides</strong>
+</p>
+</center>
+
+<hr>
+
+<center><h2>Latest Posts</h2></center>
+
+<!-- Post 1 -->
+<center>
+<article style="width:85%; border:1px solid #ccc; padding:12px; margin-bottom:12px;">
+    <h3>Getting Started with Python — A Beginner's Guide</h3>
+    <p><em>Category: Tutorials</em> &nbsp; | &nbsp; Tags: <strong>Programming</strong>, <strong>Python</strong>, <strong>Beginners</strong></p>
+    <p>
+    Python is one of the easiest languages to learn. In this short guide you will learn how to install Python,
+    run your first script, and understand basic concepts like variables, loops, and functions. Start with a text editor,
+    write <code>print("Hello, World!")</code>, save as <code>hello.py</code> and run it.
+    </p>
+
+    <center>
+    <p><strong>Share your thoughts below — comments stored locally.</strong></p>
+    </center>
+
+    <!-- Comments area for post1 -->
+    <div id="comments-post1" style="text-align:left; margin-top:10px;">
+        <!-- Comments will load here -->
+    </div>
+
+    <!-- Comment form for post1 -->
+    <center>
+    <form onsubmit="addComment(event, 'post1')" style="margin-top:8px;">
+        Name: <input type="text" id="name-post1" required>
+        Comment: <input type="text" id="comment-post1" required size="60">
+        <input type="submit" value="Post Comment">
+    </form>
+    </center>
+</article>
+</center>
+
+<!-- Post 2 -->
+<center>
+<article style="width:85%; border:1px solid #ccc; padding:12px; margin-bottom:12px;">
+    <h3>Top 5 Budget Smartphones in 2025</h3>
+    <p><em>Category: Reviews</em> &nbsp; | &nbsp; Tags: <strong>Gadgets</strong>, <strong>Smartphones</strong>, <strong>Reviews</strong></p>
+    <p>
+    Buying a phone on a budget? We compare cameras, battery life and value for money.
+    Consider display type, processor and software updates before choosing.
+    </p>
+
+    <center>
+    <p><strong>Comment and help others choose — every opinion helps.</strong></p>
+    </center>
+
+    <!-- Comments area for post2 -->
+    <div id="comments-post2" style="text-align:left; margin-top:10px;">
+        <!-- Comments will load here -->
+    </div>
+
+    <!-- Comment form for post2 -->
+    <center>
+    <form onsubmit="addComment(event, 'post2')" style="margin-top:8px;">
+        Name: <input type="text" id="name-post2" required>
+        Comment: <input type="text" id="comment-post2" required size="60">
+        <input type="submit" value="Post Comment">
+    </form>
+    </center>
+</article>
+</center>
+
+<hr>
+
+<center><h2>Tags Cloud</h2></center>
+<center>
+<p>
+<span style="border:1px solid #000; padding:4px; margin:3px;">AI</span>
+<span style="border:1px solid #000; padding:4px; margin:3px;">Programming</span>
+<span style="border:1px solid #000; padding:4px; margin:3px;">Gadgets</span>
+<span style="border:1px solid #000; padding:4px; margin:3px;">Security</span>
+<span style="border:1px solid #000; padding:4px; margin:3px;">Cloud</span>
+</p>
+</center>
+
+<hr>
+
+<center><h2>Leave a General Feedback</h2></center>
+<center>
+<form onsubmit="addGeneralFeedback(event)" style="margin-bottom:20px;">
+    Name: <input type="text" id="fb-name" required>
+    Message: <input type="text" id="fb-msg" required size="60">
+    <input type="submit" value="Send Feedback">
+</form>
+</center>
+
+<center>
+<div id="feedback-list" style="width:85%; text-align:left; border:1px dashed #999; padding:10px;">
+<!-- feedback items -->
+</div>
+</center>
+
+<hr>
+
+<center><h2>How to Use This Page</h2></center>
+<center>
+<p>
+This is a static blog demo — posts are static HTML, comments & feedback are saved in your browser using localStorage.
+No server needed. Perfect for a school project to show categories, tags and a commenting system.
+</p>
+</center>
+
+<hr>
+
+<footer>
+<pre>
+Contact: 9876543210    |    Email: techlearnblog@example.com    |    Address: Block A, Study City, India
+</pre>
+</footer>
+
+<script>
+/* Simple local comments system (works locally, no backend)
+   Comments stored under keys: comments_post1, comments_post2, feedback_list
+*/
+
+/* utility to escape HTML (very small) */
+function escapeHtml(text){
+    return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* load comments for a post */
+function loadComments(postId){
+    var key = 'comments_' + postId;
+    var list = JSON.parse(localStorage.getItem(key) || '[]');
+    var container = document.getElementById('comments-' + postId);
+    container.innerHTML = '';
+    if(list.length === 0){
+        container.innerHTML = '<p><em>No comments yet. Be the first!</em></p>';
+        return;
+    }
+    list.forEach(function(c, idx){
+        var div = document.createElement('div');
+        div.style.borderTop = '1px solid #eee';
+        div.style.padding = '6px 0';
+        div.innerHTML = '<strong>' + escapeHtml(c.name) + '</strong> &nbsp; <small>(' + c.time + ')</small><br>'
+                        + escapeHtml(c.text);
+        container.appendChild(div);
+    });
+}
+
+/* add comment for a post */
+function addComment(e, postId){
+    e.preventDefault();
+    var nameEl = document.getElementById('name-' + postId);
+    var textEl = document.getElementById('comment-' + postId);
+    var name = nameEl.value.trim();
+    var text = textEl.value.trim();
+    if(name === '' || text === '') return;
+    if(text.length > 500) { alert('Comment too long.'); return; }
+    var key = 'comments_' + postId;
+    var list = JSON.parse(localStorage.getItem(key) || '[]');
+    var now = new Date();
+    list.push({name: name, text: text, time: now.toLocaleString()});
+    localStorage.setItem(key, JSON.stringify(list));
+    nameEl.value = '';
+    textEl.value = '';
+    loadComments(postId);
+}
+
+/* general feedback */
+function loadFeedback(){
+    var list = JSON.parse(localStorage.getItem('feedback_list' ) || '[]');
+    var cont = document.getElementById('feedback-list');
+    cont.innerHTML = '<h4>Feedback</h4>';
+    if(list.length === 0){
+        cont.innerHTML += '<p><em>No feedback yet.</em></p>';
+        return;
+    }
+    list.forEach(function(f){
+        var div = document.createElement('div');
+        div.style.borderTop = '1px dashed #ddd';
+        div.style.padding = '6px 0';
+        div.innerHTML = '<strong>' + escapeHtml(f.name) + '</strong> <small>(' + f.time + ')</small><br>' + escapeHtml(f.msg);
+        cont.appendChild(div);
+    });
+}
+
+function addGeneralFeedback(e){
+    e.preventDefault();
+    var name = document.getElementById('fb-name').value.trim();
+    var msg = document.getElementById('fb-msg').value.trim();
+    if(name === '' || msg === '') return;
+    var list = JSON.parse(localStorage.getItem('feedback_list') || '[]');
+    list.push({name: name, msg: msg, time: new Date().toLocaleString()});
+    localStorage.setItem('feedback_list', JSON.stringify(list));
+    document.getElementById('fb-name').value = '';
+    document.getElementById('fb-msg').value = '';
+    loadFeedback();
+}
+
+/* initialize */
+document.addEventListener('DOMContentLoaded', function(){
+    loadComments('post1');
+    loadComments('post2');
+    loadFeedback();
+});
+</script>
+
+</body>
+</html>
